@@ -18,9 +18,7 @@
 	</div>
 	<% posts.each_value do |post| %>
 		<div class="post">
-		<h2 class="posttitle"><a href="/<%= post[:filename] %>" class="posttitle">
-		<%= post[:posttitle] %>
-		</h2></a>
+		<a href="/<%= post[:filename] %>" class="posttitle"><h2> <%= post[:posttitle] %> </h2></a>
 		<%= post[:filterhtml] %>
 		</div>
 	<% end %>
