@@ -1,17 +1,13 @@
 #! /usr/bin/env ruby
 require 'sinatra'
 require 'redcarpet'
-
-#Configuration
-title = "吕杰's Blog"
-subtitle = "Coder & Software User"
-links = [{:name => "我的Github", :link => "https://github.com/764664/"}]
-#End of Configuration
+require './config.rb'
 
 #Variables
 dir = "md/"
 posts = {}
 set :bind, '0.0.0.0'
+set :port, PORT
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
 #End of Variables
@@ -32,7 +28,7 @@ files.each do |i|
 		}
 	end
 end
-meta = {:title => title, :subtitle => subtitle, :links => links}
+meta = {:title => TITLE, :subtitle => SUBTITLE, :links => LINKS}
 
 get '/' do
   	erb :index, :locals => {:meta => meta, :posts => posts}
