@@ -1,4 +1,4 @@
-MyBlog
+SimpleBlog
 ======
 
 A Simple Blog System without a database system.
