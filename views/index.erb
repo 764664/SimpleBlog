@@ -5,19 +5,33 @@
 		<%= meta[:title] %>
 	</title>
 	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.0.2/css/bootstrap.min.css">
+	<style>
+	.posttitle{
+		color: black;
+	}
+	#title{
+		font-size: 80px;
+	}
+	#subtitle{
+		font-size: 50px;
+	}
+	.header{
+		height: 200px;
+	}
+	</style>
 </head>
 <body>
 	<div class="container">
 	<div class="header">
-		<h1> <%= meta[:title] %> </h1>
-		<h2> <%= meta[:subtitle] %> </h2>
+		<h1 id="title"> <%= meta[:title] %> </h1>
+		<h2 id="subtitle"> <%= meta[:subtitle] %> </h2>
 		<% meta[:links].each do |link| %>
 			<a href="<%= link[:link] %>"><%= link[:name] %></a>
 		<% end %>
 	</div>
 	<% posts.each_value do |post| %>
 		<div class="post">
-		<h2><a href="/<%= post[:filename] %>">
+		<h2 class="posttitle"><a href="/<%= post[:filename] %>" class="posttitle">
 		<%= post[:posttitle] %>
 		</h2></a>
 		<%= post[:filterhtml] %>
