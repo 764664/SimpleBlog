@@ -36,7 +36,7 @@ end
 
 get '/:post' do |n|
 	if posts.has_key?(n)
-		erb :post, :locals => {:post => posts[n]}
+		erb :post, :locals => {:meta => meta, :post => posts[n]}
 	else
 		"No such post."
 	end
