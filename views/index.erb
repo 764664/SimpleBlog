@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<%= meta[:title] %>
+	</title>
+	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+	<div class="header">
+		<h1> <%= meta[:title] %> </h1>
+		<h2> <%= meta[:subtitle] %> </h2>
+		<% meta[:links].each do |link| %>
+			<a href="<%= link[:link] %>"><%= link[:name] %></a>
+		<% end %>
+	</div>
+	<% posts.each_value do |post| %>
+		<div class="post">
+		<h2><a href="/<%= post[:filename] %>">
+		<%= post[:posttitle] %>
+		</h2></a>
+		<%= post[:filterhtml] %>
+		</div>
+	<% end %>
+	</div>
+</body>
+</html>
