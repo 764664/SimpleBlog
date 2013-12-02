@@ -4,20 +4,21 @@ require 'redcarpet'
 require 'socket'
 require './config.rb'
 
-#Variables
-dir = "md/"
-posts = {}
+#Configure sinatra
 set :bind, '0.0.0.0'
 set :port, PORT
+
+#Initialize local variables
+posts = {}
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
-#End of Variables
 
-files = Dir.entries(dir)
+#Load markdown files
+files = Dir.entries(DIR)
 files.sort!.reverse!
 files.each do |i|
 	if (i =~ /.+\.md/)
-		path = dir + i
+		path = DIR + i
 		lines = IO.readlines(path)
 		posttitle = lines.shift
 		content = lines.join
@@ -31,6 +32,7 @@ files.each do |i|
 end
 meta = {:title => TITLE, :subtitle => SUBTITLE, :links => LINKS}
 
+#Sinatra routes
 get '/' do
   	erb :index, :locals => {:meta => meta, :posts => posts}
 end
