@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 require 'sinatra'
 require 'redcarpet'
+require 'socket'
 require './config.rb'
 
 #Variables
@@ -32,6 +33,10 @@ meta = {:title => TITLE, :subtitle => SUBTITLE, :links => LINKS}
 
 get '/' do
   	erb :index, :locals => {:meta => meta, :posts => posts}
+end
+
+get '/ip' do
+	"Client"<<request.ip<<" "<<"Me"<<Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
 end
 
 get '/:post' do |n|
