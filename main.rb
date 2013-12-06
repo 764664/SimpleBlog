@@ -10,15 +10,17 @@ set :port, PORT
 
 #Initialize local variables
 posts = {}
+mddir = MDDIR
+linkprefix = LINKPREFIX
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
 
 #Load markdown files
-files = Dir.entries(DIR)
+files = Dir.entries(mddir)
 files.sort!.reverse!
 files.each do |i|
 	if (i =~ /.+\.md/)
-		path = DIR + i
+		path = mddir + i
 		lines = IO.readlines(path)
 		posttitle = lines.shift
 		content = lines.join
@@ -26,7 +28,8 @@ files.each do |i|
 			:filename => File.basename(i, ".md"), 
 			:posttitle => posttitle,
 			:content => markdown.render(content), 
-			:filterhtml => markdownfilterhtml.render(content)
+			:filterhtml => markdownfilterhtml.render(content),
+			:link => "./#{linkprefix}/File.basename(i, ".md")"
 		}
 	end
 end
@@ -41,7 +44,7 @@ get '/ip' do
 	"Client"<<request.ip<<" "<<"Me"<<Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
 end
 
-get '/:post' do |n|
+get '/post/:post' do |n|
 	if posts.has_key?(n)
 		erb :post, :locals => {:meta => meta, :post => posts[n]}
 	else
