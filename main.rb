@@ -29,7 +29,7 @@ files.each do |i|
 			:posttitle => posttitle,
 			:content => markdown.render(content), 
 			:filterhtml => markdownfilterhtml.render(content),
-			:link => "./#{linkprefix}/File.basename(i, ".md")"
+			:link => "./#{linkprefix}/#{File.basename(i, ".md")}"
 		}
 	end
 end
