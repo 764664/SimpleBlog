@@ -41,7 +41,7 @@ get '/' do
 end
 
 get '/ip' do
-	"Client"<<request.ip<<" "<<"Me"<<Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
+	"Client IP"<<request.ip<<"\n"<<"Site IP"<<Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
 end
 
 get '/post/:post' do |n|
