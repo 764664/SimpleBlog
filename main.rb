@@ -42,22 +42,25 @@ get '/' do
   	erb :index, :locals => {:meta => meta, :posts => posts}
 end
 
-get '/ip' do
+get '/httpinfo' do
 	serverip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
 	clientip = request.ip
 	begin
-		serverhostname = "<b>Hostname" + dnsresolver.getname(serverip) + "</b>"
-	rescue Exception => e
-		serverhostname = ""
+		serverhostname = dnsresolver.getname(serverip)
+	rescue Exception
 	end
 	begin
-		clienthostname = "<b>Hostname" + dnsresolver.getname(clientip) + "</b>"
-	rescue Exception => e
-		clienthostname = ""
+		clienthostname = dnsresolver.getname(clientip)
+	rescue Exception
 	end
-	"<b>Client IP</b> #{clientip} #{clienthostname}<br />
-	</b>Site IP</b> #{serverip} #{serverhostname}<br />
-	UA #{request.user_agent}<br />Referrer #{request.referrer}"
+	erb :httpinfo, :locals => {
+		:serverip => serverip,
+		:clientip => clientip,
+		:serverhostname => serverhostname,
+		:clienthostname => clienthostname,
+		:useragent => request.user_agent,
+		:referrer => request.referrer
+	}
 end
 
 get '/post/:post' do |n|

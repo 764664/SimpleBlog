@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTTP Info</title>
+	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+	<div class="container">
+	<b>Server IP</b> <%= serverip %>
+	<% if serverhostname %>
+		<b>Hostname</b>
+		<% serverhostname %>
+	<% end %>
+	<br />
+	<b>Client IP</b> <%= clientip %>
+		<% if clienthostname %>
+		<b>Hostname</b>
+		<% clienthostname %>
+	<% end %>
+	<br />
+	<b>User Agent</b> <%= useragent %>
+	<br />
+	<b>Referrer</b> <%= referrer %>
+	</div>
+</body>
+</html>
