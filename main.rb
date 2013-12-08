@@ -2,6 +2,7 @@
 require 'sinatra'
 require 'redcarpet'
 require 'socket'
+require 'resolv.rb'
 require './config.rb'
 
 #Configure sinatra
@@ -14,6 +15,7 @@ mddir = MDDIR
 linkprefix = LINKPREFIX
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
+dnsresolver = Resolv::DNS.new()
 
 #Load markdown files
 files = Dir.entries(mddir)
@@ -41,8 +43,10 @@ get '/' do
 end
 
 get '/ip' do
-	"Client IP #{request.ip}<br />Site IP #{Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]}
-	<br />UA #{request.user_agent}<br />Referrer #{request.referrer}"
+	siteip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
+	"Client IP #{request.ip} #{(dnsresolver.getname(request.ip))?("Hostname: " + dnsresolver.getname(request.ip)):""}<br />
+	Site IP #{siteip} #{(dnsresolver.getname(siteip))?("Hostname: " + dnsresolver.getname(siteip)):""}<br />
+	UA #{request.user_agent}<br />Referrer #{request.referrer}"
 end
 
 get '/post/:post' do |n|
