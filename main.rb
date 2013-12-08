@@ -53,6 +53,7 @@ get '/httpinfo' do
 		clienthostname = dnsresolver.getname(clientip)
 	rescue Exception
 	end
+<<<<<<< HEAD
 	erb :httpinfo, :locals => {
 		:serverip => serverip,
 		:clientip => clientip,
@@ -61,6 +62,11 @@ get '/httpinfo' do
 		:useragent => request.user_agent,
 		:referrer => request.referrer
 	}
+=======
+	"""<b>Client IP</b> #{clientip} #{clienthostname}<br />
+	</b>Site IP</b> #{serverip} #{serverhostname}<br />
+	UA #{request.user_agent}<br />Referrer #{request.referrer}"""
+>>>>>>> 6621aa2f4393b5f0a5f93469e69ecd69655051c9
 end
 
 get '/post/:post' do |n|
