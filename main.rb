@@ -43,9 +43,19 @@ get '/' do
 end
 
 get '/ip' do
-	siteip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
-	"Client IP #{request.ip} #{(dnsresolver.getname(request.ip))?("Hostname: " + dnsresolver.getname(request.ip)):""}<br />
-	Site IP #{siteip} #{(dnsresolver.getname(siteip))?("Hostname: " + dnsresolver.getname(siteip)):""}<br />
+	serverip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
+	begin
+		serverhostname = dnsresolver.getname(serverip)
+	rescue Exception => e
+		serverhostname = ""
+	end
+	begin
+		clienthostname = dnsresolver.getname(request.ip)
+	rescue Exception => e
+		clienthostname = ""
+	end
+	"Client IP #{request.ip} #{clienthostname}<br />
+	Site IP #{siteip} #{serverhostname}<br />
 	UA #{request.user_agent}<br />Referrer #{request.referrer}"
 end
 
