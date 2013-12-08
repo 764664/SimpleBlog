@@ -44,18 +44,19 @@ end
 
 get '/ip' do
 	serverip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
+	clientip = request.ip
 	begin
 		serverhostname = dnsresolver.getname(serverip)
 	rescue Exception => e
 		serverhostname = ""
 	end
 	begin
-		clienthostname = dnsresolver.getname(request.ip)
+		clienthostname = dnsresolver.getname(clientip)
 	rescue Exception => e
 		clienthostname = ""
 	end
-	"Client IP #{request.ip} #{clienthostname}<br />
-	Site IP #{siteip} #{serverhostname}<br />
+	"Client IP #{clientip} #{clienthostname}<br />
+	Site IP #{serverip} #{serverhostname}<br />
 	UA #{request.user_agent}<br />Referrer #{request.referrer}"
 end
 
