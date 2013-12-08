@@ -55,9 +55,9 @@ get '/ip' do
 	rescue Exception => e
 		clienthostname = ""
 	end
-	"<b>Client IP</b> #{clientip} #{clienthostname}<br />
+	"""<b>Client IP</b> #{clientip} #{clienthostname}<br />
 	</b>Site IP</b> #{serverip} #{serverhostname}<br />
-	UA #{request.user_agent}<br />Referrer #{request.referrer}"
+	UA #{request.user_agent}<br />Referrer #{request.referrer}"""
 end
 
 get '/post/:post' do |n|
