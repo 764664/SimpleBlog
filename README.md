@@ -7,20 +7,20 @@ The programme reads markdown files in the specific directory and shows them.
 
 Written with Ruby. Using Sinatra as web server and redcarpet as markdown parser.
 
-##Deploy
+##Installation
 
 1. Install Ruby. [rvm](https://rvm.io) is recommended.
 
 2. Install dependencies.
 
-	gem install sinatra thin redcarpet
+	bundle install
 
 3. Start.
 
 	ruby main.rb
 
-4. If you need to host multiple web sites in one vps, use nginx as reverse proxy.
+4. If you need to host multiple web sites in one vps, use nginx for reverse proxy.
 
 ##Tips
 
-The first line of the markdown file is seen as the title of the post.
+The first line of the markdown file is considered as the title of the post.
