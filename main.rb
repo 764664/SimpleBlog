@@ -5,6 +5,7 @@ require 'sinatra'
 require 'redcarpet'
 require 'socket'
 require 'resolv.rb'
+Dir.chdir(File.dirname(__FILE__))
 require './config.rb'
 
 #Configure sinatra
