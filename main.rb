@@ -48,7 +48,7 @@ get '/' do
 end
 
 get '/httpinfo' do
-	serverip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]
+	serverip = Socket.ip_address_list.detect{|ip| !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
 	clientip = request.ip
 	begin
 		serverhostname = dnsresolver.getname(serverip)
