@@ -26,7 +26,9 @@ files.sort!.reverse!
 files.each do |i|
 	if (i =~ /.+\.md/)
 		path = mddir + i
-		lines = IO.readlines(path)
+		f = File.new(path)
+		f.set_encoding(Encoding::UTF_8)
+		lines = f.readlines()
 		posttitle = lines.shift
 		content = lines.join
 		posts[File.basename(i, ".md")] = {
