@@ -14,7 +14,7 @@ set :port, PORT
 
 #Initialize local variables
 posts = {}
-content = "Initial string."
+npstring = "Initial string."
 mddir = MDDIR
 linkprefix = LINKPREFIX
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
@@ -78,9 +78,9 @@ get '/post/:post' do |n|
 end
 
 get '/notepad' do
-    erb :notepad, :locals => { :content => content }
+    erb :notepad, :locals => { :content => npstring }
 end
 
 post '/notepad' do
-    content = params[:content]
+    npstring = params[:content]
 end
