@@ -9,7 +9,7 @@ Written with Ruby. Using Sinatra as web server and redcarpet as markdown parser.
 
 ##Installation
 
-1. Install Ruby. [rvm](https://rvm.io) is recommended.
+1. Install Ruby 2.0. [rvm](https://rvm.io) is recommended.
 
 2. Install dependencies.
 
