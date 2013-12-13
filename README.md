@@ -23,4 +23,6 @@ Written with Ruby. Using Sinatra as web server and redcarpet as markdown parser.
 
 ##Tips
 
-The first line of the markdown file is considered as the title of the post.
+- The first line of the markdown file is considered as the title of the post.
+
+- Make sure the LANG variable is *.UTF-8
