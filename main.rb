@@ -50,7 +50,11 @@ end
 
 get '/httpinfo' do
 	serverip = Socket.ip_address_list.detect{|ip| !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
-	clientip = request.ip
+	if request.env['HTTP_X_FORWARDED_FOR']
+		clientip = request.env['HTTP_X_FORWARDED_FOR']
+	else
+		clientip = request.ip
+	end
 	begin
 		serverhostname = dnsresolver.getname(serverip)
 	rescue Exception
