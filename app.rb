@@ -9,6 +9,7 @@ require 'json'
 
 #Read json file and parse it.
 jsonfile = File.new("config.json")
+jsonfile.set_encoding(Encoding::UTF_8)
 json = jsonfile.read
 json = JSON.parse(json)
 
