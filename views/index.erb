@@ -13,7 +13,7 @@
 		<h1 id="title"> <%= meta[:title] %> </h1>
 		<h2 id="subtitle"> <%= meta[:subtitle] %> </h2>
 		<% meta[:links].each do |link| %>
-			<a href="<%= link[:link] %>"><%= link[:name] %></a>
+			<a href="<%= link["link"] %>"><%= link["name"] %></a>
 		<% end %>
 	</div>
 	<% posts.each_value do |post| %>
