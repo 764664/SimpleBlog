@@ -24,6 +24,7 @@ meta = {:title => title, :subtitle => subtitle, :links => links}
 #Configure sinatra
 set :bind, '0.0.0.0'
 set :port, port
+set :static_cache_control, [:public, :max_age => 300]
 
 #Initialize local variables
 posts = {}
@@ -54,6 +55,10 @@ files.each do |i|
 end
 
 #Sinatra routes
+before do
+	response.headers['Cache-Control'] = 'no-cache'
+end
+
 get '/' do
   	erb :index, :locals => {:meta => meta, :posts => posts}
 end
