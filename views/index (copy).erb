@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<%= meta[:title] %>
+	</title>
+	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+	<div class="container">
+	<div class="header">
+		<h1 id="title"> <%= meta[:title] %> </h1>
+		<h2 id="subtitle"> <%= meta[:subtitle] %> </h2>
+		<% meta[:links].each do |link| %>
+			<a href="<%= link["link"] %>"><%= link["name"] %></a>
+		<% end %>
+	</div>
+	<% articles.each do |article| %>
+		<article class="post">
+		<header class="post-header">
+		<h2 class="post-title">
+		<a href="<%= article[:link] %>"> <%= article[:title] %> </a>
+		</h2>
+		</header>
+		<section class="post-excerpt">
+		<%= article[:excerpt] %>
+		</section>
+		</article>
+	<% end %>
+	<nav class="pagination">
+		<span class="page-number">
+		Page <%= page %> of <%= pages %>
+		</span>
+		<% if pages > 1 %>
+		<a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
+		<% end %>
+	</nav>
+	<div class="footer">
+	Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by me.
+	</div>
+	</div>
+</body>
+</html>
