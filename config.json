@@ -1,9 +1,8 @@
 {
 	"title":"吕杰's Blog",
-	"subtitle":"Coder & Software User",
+	"description":"Coder & Software User",
 	"port":11001,
 	"mddir":"md/",
-	"linkprefix":"post",
 	"postinpage":10,
 	"link":[
 	{"name":"我的Github", "link":"https://github.com/764664/"},

@@ -14,13 +14,12 @@ json = jsonfile.read
 json = JSON.parse(json)
 
 title = json["title"]
-subtitle = json["subtitle"]
+description = json["description"]
 links = json["link"]
 mddir = json["mddir"]
-linkprefix = json["linkprefix"]
 port = json["port"]
 postinpage = json["postinpage"]
-meta = {:title => title, :subtitle => subtitle, :links => links}
+meta = {:title => title, :description => description, :links => links}
 
 #Configure sinatra
 set :bind, '0.0.0.0'
@@ -28,7 +27,7 @@ set :port, port
 set :static_cache_control, [:public, :max_age => 300]
 
 #Initialize local variables
-posts = Array.new()
+articles = Hash.new()
 npstring = "Initial string."
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
@@ -43,23 +42,19 @@ files.each do |i|
 		f = File.new(path)
 		f.set_encoding(Encoding::UTF_8)
 		lines = f.readlines()
-		posttitle = lines.shift
-		content = lines.join
-        excerpt = content.split("<!--more-->", 2)[0]
-        content.sub!('<!--more-->', '')
-		posts.push ({
+		title = lines.shift
+		content = markdown.render(lines.join)
+		#excerpt = markdownfilterhtml.render(content).split("\n").select { |line| not line.empty?}[0]
+		excerpt = Sanitize.clean(content).split(//).first(100).join
+		articles[File.basename(i, ".md")] = {
 			:filename => File.basename(i, ".md"), 
-			:posttitle => posttitle,
-			:content => markdown.render(content),
-            :excerpt => markdown.render(excerpt),
-			:filterhtml => markdownfilterhtml.render(content),
-			:link => "/#{linkprefix}/#{File.basename(i, ".md")}"
-		})
-        posts = posts.values
+			:title => title,
+			:content => content,
+            :excerpt => excerpt,
+			:link => "/article/#{File.basename(i, ".md")}"
+		}
 	end
 end
-postnum = files.size
-pagenum = postnum/postinpage
 
 #Sinatra routes
 before do
@@ -67,11 +62,21 @@ before do
 end
 
 get '/' do
-  	erb :index, :locals => {:meta => meta, :posts => posts.first(10), :page => 1, :pages => pagenum}
+  	erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
+  	:page => 1, :pages => (articles.size-1)/postinpage+1}
 end
 
 get '/page/:page' do |page|
-    erb :index, :locals => {:meta => meta, :posts => posts[(page-1)*10..-1].first(10), :page => page, :pages => pagenum}
+    erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] }, 
+    :page => page, :pages => (articles.size-1)/postinpage+1}
+end
+
+get '/article/:id' do |id|
+	if articles.has_key?(id)
+		erb :article, :locals => {:meta => meta, :article => articles[id]}
+	else
+		"No such post."
+	end
 end
 
 get '/httpinfo' do
@@ -97,14 +102,6 @@ get '/httpinfo' do
 		:useragent => request.user_agent,
 		:referrer => request.referrer
 	}
-end
-
-get '/post/:post' do |n|
-	if posts.has_key?(n)
-		erb :post, :locals => {:meta => meta, :post => posts[n]}
-	else
-		"No such post."
-	end
 end
 
 get '/notepad' do

@@ -4,27 +4,26 @@
 	<title>
 		<%= meta[:title] %>
 	</title>
-	<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/screen.css">
 	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
-<body>
-	<div class="container">
-	<div class="header">
+<body class="home-template">
+	<header id="site-head" style="background-image: url(/cover.png)">
 		<h1 id="title"> <%= meta[:title] %> </h1>
-		<h2 id="subtitle"> <%= meta[:subtitle] %> </h2>
 		<% meta[:links].each do |link| %>
 			<a href="<%= link["link"] %>"><%= link["name"] %></a>
 		<% end %>
-	</div>
-	<% posts.each do |post| %>
+	</header>
+	<main class="content" role="main">
+	<% articles.each do |article| %>
 		<article class="post">
 		<header class="post-header">
 		<h2 class="post-title">
-		<a href="<%= post[:link] %>"> <%= post[:posttitle] %> </a>
+		<a href="<%= article[:link] %>"> <%= article[:title] %> </a>
 		</h2>
 		</header>
 		<section class="post-excerpt">
-		<%= post[:summary] %>
+		<%= article[:excerpt] %>
 		</section>
 		</article>
 	<% end %>
@@ -36,9 +35,9 @@
 		<a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
 		<% end %>
 	</nav>
-	<div class="footer">
+	</main>
+	<footer class="site-footer">
 	Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by me.
-	</div>
-	</div>
+	</footer>
 </body>
 </html>

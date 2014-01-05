@@ -3,10 +3,15 @@ GEM
   specs:
     daemons (1.1.9)
     eventmachine (1.0.3)
+    mini_portile (0.5.2)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
     redcarpet (3.0.0)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -22,5 +27,6 @@ PLATFORMS
 
 DEPENDENCIES
   redcarpet
+  sanitize
   sinatra
   thin
