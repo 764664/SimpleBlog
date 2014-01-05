@@ -55,6 +55,7 @@ files.each do |i|
 			:filterhtml => markdownfilterhtml.render(content),
 			:link => "/#{linkprefix}/#{File.basename(i, ".md")}"
 		}
+        posts = posts.values
 	end
 end
 postnum = files.size
