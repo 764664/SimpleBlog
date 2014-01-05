@@ -28,7 +28,7 @@ set :port, port
 set :static_cache_control, [:public, :max_age => 300]
 
 #Initialize local variables
-posts = {}
+posts = Array.new()
 npstring = "Initial string."
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 markdownfilterhtml = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:filter_html => true))
@@ -47,14 +47,14 @@ files.each do |i|
 		content = lines.join
         excerpt = content.split("<!--more-->", 2)[0]
         content.sub!('<!--more-->', '')
-		posts[File.basename(i, ".md")] = {
+		posts.push ({
 			:filename => File.basename(i, ".md"), 
 			:posttitle => posttitle,
 			:content => markdown.render(content),
             :excerpt => markdown.render(excerpt),
 			:filterhtml => markdownfilterhtml.render(content),
 			:link => "/#{linkprefix}/#{File.basename(i, ".md")}"
-		}
+		})
         posts = posts.values
 	end
 end
