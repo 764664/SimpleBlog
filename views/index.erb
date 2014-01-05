@@ -28,13 +28,14 @@
 		</section>
 		</article>
 	<% end %>
-	<div class="pagination">
+	<nav class="pagination">
 		<span class="page-number">
 		Page <%= page %> of <%= pages %>
 		</span>
 		<% if pages > 1 %>
 		<a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
-	</div>
+		<% end %>
+	</nav>
 	<div class="footer">
 	Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by me.
 	</div>
