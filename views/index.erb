@@ -17,11 +17,24 @@
 		<% end %>
 	</div>
 	<% posts.each_value do |post| %>
-		<div class="post">
-		<a href="<%= post[:link] %>" class="posttitle"><h2> <%= post[:posttitle] %> </h2></a>
-		<%= post[:filterhtml] %>
-		</div>
+		<article class="post">
+		<header class="post-header">
+		<h2 class="post-title">
+		<a href="<%= post[:link] %>"> <%= post[:posttitle] %> </a>
+		</h2>
+		</header>
+		<section class="post-excerpt">
+		<%= post[:summary] %>
+		</section>
+		</article>
 	<% end %>
+	<div class="pagination">
+		<span class="page-number">
+		Page <%= page %> of <%= pages %>
+		</span>
+		<% if pages > 1 %>
+		<a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
+	</div>
 	<div class="footer">
 	Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by me.
 	</div>

@@ -19,6 +19,7 @@ links = json["link"]
 mddir = json["mddir"]
 linkprefix = json["linkprefix"]
 port = json["port"]
+postinpage = json["postinpage"]
 meta = {:title => title, :subtitle => subtitle, :links => links}
 
 #Configure sinatra
@@ -44,15 +45,20 @@ files.each do |i|
 		lines = f.readlines()
 		posttitle = lines.shift
 		content = lines.join
+        excerpt = content.split("<!--more-->", 2)[0]
+        content.sub!('<!--more-->', '')
 		posts[File.basename(i, ".md")] = {
 			:filename => File.basename(i, ".md"), 
 			:posttitle => posttitle,
-			:content => markdown.render(content), 
+			:content => markdown.render(content),
+            :excerpt => markdown.render(excerpt),
 			:filterhtml => markdownfilterhtml.render(content),
 			:link => "/#{linkprefix}/#{File.basename(i, ".md")}"
 		}
 	end
 end
+postnum = files.size
+pagenum = postnum/postinpage
 
 #Sinatra routes
 before do
@@ -60,7 +66,11 @@ before do
 end
 
 get '/' do
-  	erb :index, :locals => {:meta => meta, :posts => posts}
+  	erb :index, :locals => {:meta => meta, :posts => posts.first(10), :page => 1, :pages => pagenum}
+end
+
+get '/page/:page' do |page|
+    erb :index, :locals => {:meta => meta, :posts => posts[(page-1)*10..-1].first(10), :page => page, :pages => pagenum}
 end
 
 get '/httpinfo' do

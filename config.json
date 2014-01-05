@@ -4,6 +4,7 @@
 	"port":11001,
 	"mddir":"md/",
 	"linkprefix":"post",
+	"postinpage":10,
 	"link":[
 	{"name":"我的Github", "link":"https://github.com/764664/"},
 	{"name":"我的记事本", "link":"/notepad"},
