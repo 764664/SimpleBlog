@@ -1,31 +1,45 @@
 SimpleBlog
 ======
 
-A Simple Blog System without a database system.
+A simple blog without a database system.
 
-The programme reads markdown files in the specific directory and shows them.
+Reads markdown files in the specific directory and renders them.
 
-Written with Ruby. Using Sinatra as web server and redcarpet as markdown parser.
+##Demo
+[lvjie.me](http://lvjie.me)
 
 ##Installation
 
-1. Install Ruby 2.0. [rvm](https://rvm.io) is recommended.
+1. Install Ruby 2.*. [rvm](https://rvm.io) is recommended.
 
 2. Install dependencies.
 
 	bundle install
 
-3. Start.
+3. Puts the markdown files in the directory (md by default).
 
-	ruby main.rb
+4. Start.
 
-4. If you need to host multiple web sites in one vps, use nginx for reverse proxy.
+	ruby app.rb
+
+5. Enjoy.
+
+##Configuration
+
+All configurations are in config.json.
+
+You can modify it by yourself.
 
 ##Tips
 
 - The first line of the markdown file is considered as the title of the post.
 
-##TODO
+- The second line of it is considered as the date published. (Format: YYYY-MM-DD)
 
-- Support WP more tag
-- Beautify
+- The third line of it is considered as the category.
+
+- If you need to host multiple web sites in one vps, use [nginx](http://nginx.org/) for reverse proxy.
+
+##Thanks
+
+Thanks to Ghost for providing the theme.
