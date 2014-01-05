@@ -18,6 +18,9 @@
 	<% articles.each do |article| %>
 		<article class="post">
 		<header class="post-header">
+		<span class="post-meta">
+		<time> <%= article[:date] %> </time> on <%= article[:category] %>
+		</span>
 		<h2 class="post-title">
 		<a href="<%= article[:link] %>"> <%= article[:title] %> </a>
 		</h2>

@@ -5,7 +5,7 @@ Bundler.require(:default)
 require 'socket'
 require 'resolv'
 require 'json'
-#Dir.chdir(File.dirname(__FILE__))
+require 'date'
 
 #Read json file and parse it.
 jsonfile = File.new("config.json")
@@ -16,6 +16,7 @@ json = JSON.parse(json)
 title = json["title"]
 description = json["description"]
 links = json["link"]
+go = json["go"]
 mddir = json["mddir"]
 port = json["port"]
 postinpage = json["postinpage"]
@@ -43,14 +44,17 @@ files.each do |i|
 		f.set_encoding(Encoding::UTF_8)
 		lines = f.readlines()
 		title = lines.shift
+		date = Date.parse(lines.shift.chomp).strftime('%d %b %Y')
+		category = lines.shift
 		content = markdown.render(lines.join)
-		#excerpt = markdownfilterhtml.render(content).split("\n").select { |line| not line.empty?}[0]
 		excerpt = Sanitize.clean(content).split(//).first(100).join
 		articles[File.basename(i, ".md")] = {
 			:filename => File.basename(i, ".md"), 
 			:title => title,
 			:content => content,
             :excerpt => excerpt,
+            :date => date,
+            :category => category,
 			:link => "/article/#{File.basename(i, ".md")}"
 		}
 	end
@@ -75,8 +79,12 @@ get '/article/:id' do |id|
 	if articles.has_key?(id)
 		erb :article, :locals => {:meta => meta, :article => articles[id]}
 	else
-		"No such post."
+		redirect to('/')
 	end
+end
+
+get '/go/:key' do |key|
+	redirect to(go[key])
 end
 
 get '/httpinfo' do

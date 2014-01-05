@@ -16,6 +16,10 @@
 		<% end %>
 	</header>
 
+	<span class="post-meta">
+	<time> <%= article[:date] %> </time> on <%= article[:category] %>
+	</span>	
+	
 	<h1 class="post-title"> <%= article[:title] %> </h1>
 	<section class="post-content">
 	<%= article[:content] %> 

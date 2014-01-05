@@ -9,5 +9,8 @@
 	{"name":"我的记事本", "link":"/notepad"},
 	{"name":"HTTP信息", "link":"/httpinfo"},
 	{"name":"我的文件分享", "link":"http://pan.baidu.com/s/1pJGwgRL"}
-	]
+	],
+	"go":{
+		"potplayer":"http://pan.baidu.com/s/1pJHcgn5"
+	}
 }
