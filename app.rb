@@ -38,38 +38,38 @@ dnsresolver = Resolv::DNS.new()
 files = Dir.entries(mddir)
 files.sort!.reverse!
 files.each do |i|
-	if (i =~ /.+\.md/)
-		path = mddir + i
-		f = File.new(path)
-		f.set_encoding(Encoding::UTF_8)
-		lines = f.readlines()
-		title = lines.shift
-		datetime = lines.shift.chomp
-		date = Date.parse(datetime).strftime('%d %b %Y')
-		category = lines.shift
-		content = markdown.render(lines.join)
-		excerpt = Sanitize.clean(content).split(//).first(100).join
-		articles[File.basename(i, ".md")] = {
-			:filename => File.basename(i, ".md"), 
-			:title => title,
-			:content => content,
+    if (i =~ /.+\.md/)
+        path = mddir + i
+        f = File.new(path)
+        f.set_encoding(Encoding::UTF_8)
+        lines = f.readlines()
+        title = lines.shift
+        datetime = lines.shift.chomp
+        date = Date.parse(datetime).strftime('%d %b %Y')
+        category = lines.shift
+        content = markdown.render(lines.join)
+        excerpt = Sanitize.clean(content).split(//).first(100).join
+        articles[File.basename(i, ".md")] = {
+            :filename => File.basename(i, ".md"), 
+            :title => title,
+            :content => content,
             :excerpt => excerpt,
             :date => date,
-		:datetime => datetime,
+            :datetime => datetime,
             :category => category,
-			:link => "/article/#{File.basename(i, ".md")}"
-		}
-	end
+            :link => "/article/#{File.basename(i, ".md")}"
+        }
+    end
 end
 
 #Sinatra routes
 before do
-	response.headers['Cache-Control'] = 'no-cache'
+    response.headers['Cache-Control'] = 'no-cache'
 end
 
 get '/' do
-  	erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
-  	:page => 1, :pages => (articles.size-1)/postinpage+1}
+    erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
+    :page => 1, :pages => (articles.size-1)/postinpage+1}
 end
 
 get '/page/:page' do |page|
@@ -78,15 +78,15 @@ get '/page/:page' do |page|
 end
 
 get '/article/:id' do |id|
-	if articles.has_key?(id)
-		erb :article, :locals => {:meta => meta, :article => articles[id]}
-	else
-		redirect to('/')
-	end
+    if articles.has_key?(id)
+        erb :article, :locals => {:meta => meta, :article => articles[id]}
+    else
+        redirect to('/')
+    end
 end
 
 get '/go/:key' do |key|
-	redirect to(go[key])
+    redirect to(go[key])
 end
 
 get '/httpinfo' do
