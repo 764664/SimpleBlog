@@ -25,7 +25,7 @@ meta = {:title => title, :description => description, :links => links}
 #Configure sinatra
 set :bind, '0.0.0.0'
 set :port, port
-set :static_cache_control, [:public, :max_age => 300]
+set :static_cache_control, [:public, :max_age => 2592000]
 
 #Initialize local variables
 articles = Hash.new()
