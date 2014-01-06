@@ -44,7 +44,8 @@ files.each do |i|
 		f.set_encoding(Encoding::UTF_8)
 		lines = f.readlines()
 		title = lines.shift
-		date = Date.parse(lines.shift.chomp).strftime('%d %b %Y')
+		datetime = lines.shift.chomp
+		date = Date.parse(datetime).strftime('%d %b %Y')
 		category = lines.shift
 		content = markdown.render(lines.join)
 		excerpt = Sanitize.clean(content).split(//).first(100).join
@@ -54,6 +55,7 @@ files.each do |i|
 			:content => content,
             :excerpt => excerpt,
             :date => date,
+		:datetime => datetime,
             :category => category,
 			:link => "/article/#{File.basename(i, ".md")}"
 		}

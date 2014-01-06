@@ -1,7 +1,7 @@
 {
 	"title":"吕杰's Blog",
 	"description":"Coder & Software User",
-	"port":11001,
+	"port":10001,
 	"mddir":"md/",
 	"postinpage":10,
 	"link":[
