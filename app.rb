@@ -58,7 +58,6 @@ class Blog
 end
 
 class MyBlog < Sinatra::Base
-  
   blog = Blog.new
   config = blog.config
   meta = blog.meta
@@ -92,7 +91,7 @@ class MyBlog < Sinatra::Base
   end
   
   get '/go/:key' do |key|
-    redirect to(@config["go"][key])
+    redirect to(config["go"][key])
   end
   
   get '/httpinfo' do

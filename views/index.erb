@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-	<title><%= meta[:title] %></title>
-	<link rel="stylesheet" type="text/css" href="/screen.css" />
+  <meta charset="UTF-8" />
+  <title><%= meta[:title] %></title>
+  <link rel="stylesheet" type="text/css" href="/screen.css" />
 </head>
 <body class="home-template">
-	<header id="site-head" style="background-image: url(/cover.png)">
-		<h1 id="title"> <%= meta[:title] %> </h1>
-		<% meta[:links].each do |link| %>
-			<a href="<%= link["link"] %>"><%= link["name"] %></a>
-		<% end %>
-	</header>
-	<main class="content" role="main">
-	<% articles.each do |article| %>
-		<article class="post">
-		<header class="post-header">
-		<span class="post-meta">
-		<time datetime="<%= article[:datetime] %>"><%= article[:date] %></time> on <%= article[:category] %>
-		</span>
-		<h2 class="post-title">
-		<a href="<%= article[:link] %>"> <%= article[:title] %> </a>
-		</h2>
-		</header>
-		<section class="post-excerpt">
-		<%= article[:excerpt] %>
-		</section>
-		</article>
-	<% end %>
-	<nav class="pagination">
-		<span class="page-number">
-		Page <%= page %> of <%= pages %>
-		</span>
-		<% if pages > 1 %>
-		<a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
-		<% end %>
-	</nav>
-	</main>
-	<footer class="site-footer">
-	Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by <a href="https://github.com/764664/">Observer</a>.
-	</footer>
+  <header id="site-head" style="background-image: url(/cover.png)">
+    <h1 id="title"> <%= meta[:title] %> </h1>
+    <% meta[:links].each do |link| %>
+      <a href="<%= link["link"] %>"><%= link["name"] %></a>
+    <% end %>
+  </header>
+  <main class="content" role="main">
+  <% articles.each do |article| %>
+    <article class="post">
+    <header class="post-header">
+    <span class="post-meta">
+    <time datetime="<%= article[:datetime] %>"><%= article[:date] %></time> on <%= article[:category] %>
+    </span>
+    <h2 class="post-title">
+    <a href="<%= article[:link] %>"> <%= article[:title] %> </a>
+    </h2>
+    </header>
+    <section class="post-excerpt">
+    <%= article[:excerpt] %>
+    </section>
+    </article>
+  <% end %>
+  <nav class="pagination">
+    <span class="page-number">
+    Page <%= page %> of <%= pages %>
+    </span>
+    <% if pages > 1 %>
+    <a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
+    <% end %>
+  </nav>
+  </main>
+  <footer class="site-footer">
+  Powered by <a href="https://github.com/764664/SimpleBlog">SimpleBlog</a> authored by <a href="https://github.com/764664/">Observer</a>.
+  </footer>
 </body>
 </html>

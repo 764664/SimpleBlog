@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= article[:title] %>
-	</title>
-	<link rel="stylesheet" type="text/css" href="/screen.css">
+  <title>
+    <%= article[:title] %>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/screen.css">
 </head>
 <body class="post-template">
-	<main class="content" role="main">
-	<article class="post">
-	<header class="post-header">
-		<a href="/"><h1 id="title"> <%= meta[:title] %> </h1></a>
-		<% meta[:links].each do |link| %>
-			<a href="<%= link["link"] %>"><%= link["name"] %></a>
-		<% end %>
-	</header>
+  <main class="content" role="main">
+  <article class="post">
+  <header class="post-header">
+    <a href="/"><h1 id="title"> <%= meta[:title] %> </h1></a>
+    <% meta[:links].each do |link| %>
+      <a href="<%= link["link"] %>"><%= link["name"] %></a>
+    <% end %>
+  </header>
 
-	<span class="post-meta">
-	<time> <%= article[:date] %> </time> on <%= article[:category] %>
-	</span>	
-	
-	<h1 class="post-title"> <%= article[:title] %> </h1>
-	<section class="post-content">
-	<%= article[:content] %> 
-	</section>
-	</article>
-	</main>
+  <span class="post-meta">
+  <time> <%= article[:date] %> </time> on <%= article[:category] %>
+  </span> 
+  
+  <h1 class="post-title"> <%= article[:title] %> </h1>
+  <section class="post-content">
+  <%= article[:content] %> 
+  </section>
+  </article>
+  </main>
 </body>
 </html>
