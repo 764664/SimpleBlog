@@ -20,7 +20,7 @@ Reads markdown files in the specific directory and renders them.
 
 4. Start.
 
-	ruby app.rb
+	rackup
 
 5. Enjoy.
 
