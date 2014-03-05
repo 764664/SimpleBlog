@@ -10,7 +10,6 @@ require 'date'
 class Blog
   attr_accessor :npstring, :articles, :config, :meta
 
-  private
   def initialize
     @articles = {}
     @npstring = ""
@@ -38,7 +37,11 @@ class Blog
   end
 
   def load_file file
-    lines = File.new(file).set_encoding(Encoding::UTF_8).readlines
+    lines = ""
+    File.open(file) do |f|
+      lines = f.set_encoding(Encoding::UTF_8).readlines
+    end
+    File.new(file).set_encoding(Encoding::UTF_8).readlines
     title = lines.shift
     datetime = lines.shift.chomp
     category = lines.shift
@@ -54,6 +57,19 @@ class Blog
       :datetime => datetime,
       :link => "/article/#{File.basename(file, ".md")}"
     }
+  end
+
+  def add_article content
+    puts content
+    id = @articles.keys.sort[-1].to_i + 1
+    filename = sprintf("%04d", id) + ".md"
+    File.open(@config["mddir"] + filename, "wb") do |f|
+      f.set_encoding(Encoding::UTF_8).write(content)
+      f.close
+    end
+    Dir.chdir(File.join(Dir.pwd, @config["mddir"])) do
+      load_file filename
+    end
   end
 end
 
@@ -78,10 +94,22 @@ class MyBlog < Sinatra::Base
   end
   
   get '/page/:page' do |page|
+    page = page.to_i
     erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] }, 
     :page => page, :pages => (articles.size-1)/config["postinpage"]+1}
   end
   
+  get '/article/add' do
+    erb :addarticle
+  end
+
+  post '/article/add' do
+    if params[:password] == config["pass"]
+      blog.add_article(params[:content])
+    end
+    redirect to('/')
+  end
+
   get '/article/:id' do |id|
     if articles.has_key?(id)
       erb :article, :locals => {:meta => meta, :article => articles[id]}
@@ -127,4 +155,5 @@ class MyBlog < Sinatra::Base
   post '/notepad' do
     npstring = params[:content]
   end
+
 end

@@ -3,8 +3,11 @@ GEM
   specs:
     daemons (1.1.9)
     eventmachine (1.0.3)
+    eventmachine (1.0.3-x86-mingw32)
     mini_portile (0.5.2)
     nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    nokogiri (1.6.1-x86-mingw32)
       mini_portile (~> 0.5.0)
     rack (1.5.2)
     rack-protection (1.5.1)
@@ -24,6 +27,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   redcarpet

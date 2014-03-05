@@ -32,7 +32,10 @@
     <span class="page-number">
     Page <%= page %> of <%= pages %>
     </span>
-    <% if pages > 1 %>
+    <% if page > 1 %>
+    <a class="newer-posts" href="/page/<%= page - 1 %>">Newer Posts →</a>
+    <% end %>
+    <% if pages > page %>
     <a class="older-posts" href="/page/<%= page + 1 %>">Older Posts →</a>
     <% end %>
   </nav>

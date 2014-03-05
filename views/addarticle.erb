@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add article</title>
+    <style>
+        textarea{
+            width:500px;
+            height:400px;
+        }
+        .container{
+            width:900px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>Add article</h1>
+<form action="/article/add" method="post">
+    <textarea name="content"></textarea>
+    <br />
+    <p>Passphrase</p>
+    <input name="password" type="password" />
+    <br />
+    <input type="submit" value="Add!" />
+</form>
+</div>
+</body>
+</html>
