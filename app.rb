@@ -46,7 +46,7 @@ class Blog
     datetime = lines.shift.chomp
     category = lines.shift
     content = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(lines.join)
-    excerpt = Sanitize.clean(content).split(//).first(100).join
+    excerpt = Sanitize.clean(content).split(//).first(200).join
     @articles[File.basename(file, ".md")] = {
       :filename => File.basename(file, ".md"), 
       :title => title,
@@ -81,7 +81,6 @@ class MyBlog < Sinatra::Base
   npstring = blog.npstring
 
   set :bind, '0.0.0.0'
-  set :port, config["port"]
   set :static_cache_control, [:public, :max_age => 2592000]
 
   before do

@@ -4,27 +4,31 @@
   <title>
     <%= article[:title] %>
   </title>
-  <link rel="stylesheet" type="text/css" href="/screen.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/style.css" />
 </head>
-<body class="post-template">
-  <main class="content" role="main">
-  <article class="post">
-  <header class="post-header">
-    <a href="/"><h1 id="title"> <%= meta[:title] %> </h1></a>
-    <% meta[:links].each do |link| %>
-      <a href="<%= link["link"] %>"><%= link["name"] %></a>
-    <% end %>
-  </header>
+<body>
 
+
+  <div id="site-head">
+  <div class="container">
+    <h1 id="site-title"> <a href="/"> <%= meta[:title] %> </a> </h1>
+    <p id="site-subtitle"> <%= meta[:description] %> </p>
+  </div>
+  </div>
+  <div class="container">
+  <h1 class="post-title"> <%= article[:title] %> </h1>
   <span class="post-meta">
   <time> <%= article[:date] %> </time> on <%= article[:category] %>
   </span> 
   
-  <h1 class="post-title"> <%= article[:title] %> </h1>
+  
   <section class="post-content">
   <%= article[:content] %> 
   </section>
-  </article>
-  </main>
+
+  </div>
 </body>
 </html>
