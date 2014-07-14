@@ -18,11 +18,11 @@ class Blog
   end
 
   def load_config
-    jsonfile = File.new("config.json")
-    jsonfile.set_encoding(Encoding::UTF_8)
-    json = JSON.parse(jsonfile.read)
-    @config = json
-    @meta = {:title => json["title"], :description => json["description"], :links => json["links"]}
+    File.open("config.json") do |f|
+      f.set_encoding(Encoding::UTF_8)
+      @config = JSON.parse(f.read)
+    end
+    @meta = {:title => @config["title"], :description => @config["description"], :links => @config["links"]}
   end
   
   def load_data
@@ -60,7 +60,6 @@ class Blog
   end
 
   def add_article content
-    puts content
     id = @articles.keys.sort[-1].to_i + 1
     filename = sprintf("%04d", id) + ".md"
     File.open(@config["mddir"] + filename, "wb") do |f|
@@ -80,14 +79,34 @@ class MyBlog < Sinatra::Base
   articles = blog.articles
   npstring = blog.npstring
 
-  set :bind, '0.0.0.0'
-  set :static_cache_control, [:public, :max_age => 2592000]
+  #set :bind, '0.0.0.0'
+  #set :static_cache_control, [:public, :max_age => 2592000]
+
+  def get_hostname(ip)
+    begin
+      Resolv::DNS.new().getname(ip)
+    rescue
+    end
+  end
+
+  def client_ip
+    if request.env['HTTP_X_FORWARDED_FOR']
+      clientip = request.env['HTTP_X_FORWARDED_FOR']
+    else
+      clientip = request.ip
+    end
+  end
+
+  def server_ip
+    serverip = Socket.ip_address_list.detect{|ip| !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
+  end
 
   before do
     response.headers['Cache-Control'] = 'no-cache'
   end
   
   get '/' do
+    redirect to 'http://en.lvjie.me' if request.env["HTTP_ACCEPT_LANGUAGE"] != "zh-cn"
     erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
     :page => 1, :pages => (articles.size-1)/config["postinpage"]+1}
   end
@@ -122,26 +141,11 @@ class MyBlog < Sinatra::Base
   end
   
   get '/httpinfo' do
-    dnsresolver = Resolv::DNS.new()
-    serverip = Socket.ip_address_list.detect{|ip| !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
-    if request.env['HTTP_X_FORWARDED_FOR']
-      clientip = request.env['HTTP_X_FORWARDED_FOR']
-    else
-      clientip = request.ip
-    end
-    begin
-      serverhostname = dnsresolver.getname(serverip)
-    rescue Exception
-    end
-    begin
-      clienthostname = dnsresolver.getname(clientip)
-    rescue Exception
-    end
     erb :httpinfo, :locals => {
-      :serverip => serverip,
-      :clientip => clientip,
-      :serverhostname => serverhostname,
-      :clienthostname => clienthostname,
+      :serverip => self.server_ip,
+      :clientip => self.client_ip,
+      :serverhostname => self.get_hostname(self.server_ip),
+      :clienthostname => self.get_hostname(self.client_ip),
       :useragent => request.user_agent,
       :referrer => request.referrer
     }
