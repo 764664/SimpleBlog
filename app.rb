@@ -106,7 +106,7 @@ class MyBlog < Sinatra::Base
   end
   
   get '/' do
-    redirect to 'http://en.lvjie.me' if request.env["HTTP_ACCEPT_LANGUAGE"] != "zh-cn"
+    #redirect to 'http://en.lvjie.me' if request.env["HTTP_ACCEPT_LANGUAGE"] != "zh-cn"
     erb :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
     :page => 1, :pages => (articles.size-1)/config["postinpage"]+1}
   end
