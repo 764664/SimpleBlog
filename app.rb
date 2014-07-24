@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
+require 'action_controller'
 require 'socket'
 require 'resolv'
 require 'json'
@@ -46,7 +47,7 @@ class Blog
     datetime = lines.shift.chomp
     category = lines.shift
     content = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(lines.join)
-    excerpt = Sanitize.clean(content).split(//).first(200).join
+    excerpt = ActionController::Base.helpers.sanitize(content, tags: %w(br))[0..200] + "..."
     @articles[File.basename(file, ".md")] = {
       :filename => File.basename(file, ".md"), 
       :title => title,
