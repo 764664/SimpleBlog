@@ -3,7 +3,7 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 require 'action_controller'
-require 'socket'
+require 'net/http'
 require 'resolv'
 require 'json'
 require 'date'
@@ -99,7 +99,8 @@ class MyBlog < Sinatra::Base
   end
 
   def server_ip
-    serverip = Socket.ip_address_list.detect{|ip| !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
+    #serverip = Socket.ip_address_list.detect{|ip| and !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
+    serverip = JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"]
   end
 
   before do
