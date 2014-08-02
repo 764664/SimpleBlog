@@ -92,9 +92,9 @@ class MyBlog < Sinatra::Base
 
   def client_ip
     if request.env['HTTP_X_FORWARDED_FOR']
-      clientip = request.env['HTTP_X_FORWARDED_FOR']
+      client_ip = request.env['HTTP_X_FORWARDED_FOR']
     else
-      clientip = request.ip
+      client_ip = request.ip
     end
   end
 
@@ -104,8 +104,9 @@ class MyBlog < Sinatra::Base
                   server_ip_list.ip_address
                 else
                   JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"]
+                end
   end
-
+                  
   before do
     response.headers['Cache-Control'] = 'no-cache'
   end
