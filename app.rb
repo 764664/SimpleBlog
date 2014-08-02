@@ -99,8 +99,8 @@ class MyBlog < Sinatra::Base
   end
 
   def server_ip
-    #serverip = Socket.ip_address_list.detect{|ip| and !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
-    serverip = JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"]
+    serverip = Socket.ip_address_list.detect{|ip| ip.ipv4? and !ip.ipv4_private? and !ip.ipv4_loopback?}.ip_address
+    serverip = JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"] unless serverip
   end
 
   before do
