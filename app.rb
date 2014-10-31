@@ -25,7 +25,7 @@ class Blog
     end
     @meta = {:title => @config["title"], :description => @config["description"], :links => @config["links"]}
   end
-  
+
   def load_data
     files = Dir.entries(@config["mddir"]).sort.reverse
     Dir.chdir(File.join(Dir.pwd, @config["mddir"])) do
@@ -49,7 +49,7 @@ class Blog
     content = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(lines.join)
     excerpt = ActionController::Base.helpers.sanitize(content, tags: %w(br))[0..200] + "..."
     @articles[File.basename(file, ".md")] = {
-      :filename => File.basename(file, ".md"), 
+      :filename => File.basename(file, ".md"),
       :title => title,
       :date => Date.parse(datetime).strftime('%d %b %Y'),
       :category => category,
@@ -101,28 +101,28 @@ class MyBlog < Sinatra::Base
   def server_ip
     server_ip_list = Socket.ip_address_list.detect{|ip| ip.ipv4? and !ip.ipv4_private? and !ip.ipv4_loopback?}
     server_ip = if server_ip_list
-                  server_ip_list.ip_address
-                else
-                  JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"]
-                end
+      server_ip_list.ip_address
+    else
+      JSON.parse( Net::HTTP.get( URI ("http://httpbin.org/ip" ) ) )["origin"]
+    end
   end
-                  
+
   before do
     response.headers['Cache-Control'] = 'no-cache'
   end
-  
+
   get '/' do
     #redirect to 'http://en.lvjie.me' if request.env["HTTP_ACCEPT_LANGUAGE"] != "zh-cn"
-    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] }, 
-    :page => 1, :pages => (articles.size-1)/config["postinpage"]+1}
+    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] },
+                             :page => 1, :pages => (articles.size-1)/config["postinpage"]+1}
   end
-  
+
   get '/page/:page' do |page|
     page = page.to_i
-    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] }, 
+    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] },
     :page => page, :pages => (articles.size-1)/config["postinpage"]+1}
   end
-  
+
   get '/article/add' do
     erb :addarticle
   end
@@ -141,11 +141,11 @@ class MyBlog < Sinatra::Base
       redirect to('/')
     end
   end
-  
+
   get '/go/:key' do |key|
     redirect to(config["go"][key])
   end
-  
+
   get '/httpinfo' do
     erb :httpinfo, :locals => {
       :serverip => self.server_ip,
@@ -156,11 +156,11 @@ class MyBlog < Sinatra::Base
       :referrer => request.referrer
     }
   end
-  
+
   get '/notepad' do
     erb :notepad, :locals => { :content => npstring }
   end
-  
+
   post '/notepad' do
     npstring = params[:content]
   end
