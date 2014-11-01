@@ -74,7 +74,7 @@ class Blog
 end
 
 class MyBlog < Sinatra::Base
-  use Rack::GoogleAnalytics, :tracker => 'UA-56311741-1'
+  use Rack::GoogleAnalytics, :tracker => 'UA-46808684-1'
 
   blog = Blog.new
   config = blog.config
