@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'sinatra'
 gem 'redcarpet'
-gem 'thin'
+#gem 'thin'
 gem 'actionpack'
 gem 'haml'
+gem 'rack-google-analytics'
