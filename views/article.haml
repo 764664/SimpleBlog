@@ -1,0 +1,7 @@
+.container
+  %h1.post-title= article[:title]
+  %span.post-meta
+    %time= article[:date]
+    on
+    =article[:category]
+  %section.post-content= article[:content]
