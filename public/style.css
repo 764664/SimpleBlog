@@ -2,11 +2,6 @@ body
 {
     font-size: 16px;
 }
-h1
-{
-    font-size: 60px;
-    color:white;
-}
 h2
 {
     font-size: 36px;
@@ -20,10 +15,6 @@ a:hover
     color: blue;
     text-decoration:none;
 }
-.post-title a
-{
-    color: black;
-}
 #site-head
 {
     background-color: rgb(111, 84, 153);
@@ -33,6 +24,7 @@ a:hover
 #site-title
 {
     padding-top: 50px;
+    font-size: 60px;
 }
 #site-subtitle
 {
@@ -49,10 +41,8 @@ a:hover
 {
     font-size: 21px;
 }
-
 .post-title
 {
-    color: black;
     font-size: 36px;
 }
 .post-content
@@ -60,19 +50,13 @@ a:hover
     padding-top: 30px;
     padding-bottom: 60px;
 }
-#site-title a
+h1#site-title
 {
     color: white;
 }
-#site-title a:hover
+h1#site-title:hover
 {
     color: blue;
-    text-decoration:none;
-}
-.post-title a:hover
-{
-    color: blue;
-    text-decoration:none;
 }
 #site-pages
 {   padding: 20px;
@@ -87,16 +71,13 @@ footer
     padding: 50px;
     font-size: 30px;
 }
-.side a
-{
-    font-size: 20px;
-}
 .links
 {
     padding-left: 3px;
 }
-.link
+.link a
 {
+    font-size: 20px;
     height: 40px;
     padding-top: 5px;
     line-height: 16px;
@@ -109,7 +90,4 @@ footer
 {
     color: #4183c4;
 }
-.post-content a:hover
-{
-    color: blue;
-}
+
