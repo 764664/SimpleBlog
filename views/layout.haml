@@ -11,10 +11,9 @@
   %body
     #site-head
       .container
-        %h1#site-title
-          = meta[:title]
-        %p#site-subtitle
-          = meta[:description]
+        %a{href:"/"}
+          %h1#site-title= meta[:title]
+        %p#site-subtitle= meta[:description]
     = yield
     %footer.site-footer
       Powered by

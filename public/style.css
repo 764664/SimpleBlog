@@ -38,6 +38,7 @@ a:hover
 {
     font-size: 24px;
     color: #cdbfe3;
+    padding-left: 5px;
 }
 .post-header
 {
@@ -92,13 +93,23 @@ footer
 }
 .links
 {
-    padding-left: 10px;
+    padding-left: 3px;
+}
+.link
+{
+    height: 40px;
+    padding-top: 5px;
+    line-height: 16px;
 }
 .post-excerpt
 {
     color: black;
 }
 .post-content a
+{
+    color: #4183c4;
+}
+.post-content a:hover
 {
     color: blue;
 }

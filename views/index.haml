@@ -21,5 +21,8 @@
       %p Links
       .links
         - meta[:links].each do |link|
-          %a.links{href: link["link"]}= link["name"]
-          %br/
+          .link
+            %a.links{href: link["link"]}
+              %img{src: link["img"], width: "16px"}
+              = link["name"]
+            %br/
