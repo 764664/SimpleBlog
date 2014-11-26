@@ -1,48 +1,25 @@
-!!!
-%html
-  %head
-    %meta{charset: "UTF-8"}/
-    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
-    %title= meta[:title]
-    %link{href: "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", rel: "stylesheet"}/
-    %script{src: "//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js"}
-    %script{src: "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"}
-    %link{href: "/style.css", rel: "stylesheet", type: "text/css"}/
-  %body
-    #site-head
-      .container
-        %h1#site-title
-          = meta[:title]
-        %p#site-subtitle
-          = meta[:description]
-    .container
-      .row
-        .col-md-9
-          - articles.each do |article|
-            %article.post
-              %header.post-header
-                %h2.post-title
-                  %a{href: article[:link]}
-                    = article[:title]
-                %span.post-meta
-                  %time{datetime: article[:datetime]}= article[:date]
-                  on #{article[:category]}
-              %section.post-excerpt= article[:excerpt]
-          #site-pages
-            Page #{page} of #{pages}
-            - if page > 1
-              %a.newer-posts{href: "/page/#{page - 1}"} Newer Posts →
-            - if pages > page
-              %a.older-posts{href: "/page/#{page + 1}"} Older Posts →
-        .col-md-3.side
-          %p Links
-          .links
-            - meta[:links].each do |link|
-              %a.links{href: link["link"]}= link["name"]
-              %br/
-      %footer.site-footer
-        Powered by
-        %a{href: "https://github.com/764664/SimpleBlog"} SimpleBlog
-        authored by
-        = succeed "." do
-          %a{href: "https://github.com/764664/"} Observer
+.container
+  .row
+    .col-md-9
+      - articles.each do |article|
+        %article.post
+          %header.post-header
+            %h2.post-title
+              %a{href: article[:link]}
+                = article[:title]
+            %span.post-meta
+              %time{datetime: article[:datetime]}= article[:date]
+              on #{article[:category]}
+          %section.post-excerpt= article[:excerpt]
+      #site-pages
+        Page #{page} of #{pages}
+        - if page > 1
+          %a.newer-posts{href: "/page/#{page - 1}"} Newer Posts →
+        - if pages > page
+          %a.older-posts{href: "/page/#{page + 1}"} Older Posts →
+    .col-md-3.side
+      %p Links
+      .links
+        - meta[:links].each do |link|
+          %a.links{href: link["link"]}= link["name"]
+          %br/

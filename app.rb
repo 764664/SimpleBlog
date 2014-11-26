@@ -115,14 +115,14 @@ class MyBlog < Sinatra::Base
 
   get '/' do
     #redirect to 'http://en.lvjie.me' if request.env["HTTP_ACCEPT_LANGUAGE"] != "zh-cn"
-    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] },
-                             :page => 1, :pages => (articles.size-1)/config["postinpage"]+1}
+    haml :index, :locals => {:title => meta[:title], :meta => meta, :articles => articles.keys.sort.reverse.first(10).map{ |n| articles[n] },
+                             :page => 1, :pages => (articles.size-1)/config["post_per_page"]+1}
   end
 
   get '/page/:page' do |page|
     page = page.to_i
-    haml :index, :locals => {:meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] },
-    :page => page, :pages => (articles.size-1)/config["postinpage"]+1}
+    haml :index, :locals => {:title => meta[:title], :meta => meta, :articles => articles.keys.sort.reverse[(page-1)*10..-1].first(10).map{ |n| articles[n] },
+    :page => page, :pages => (articles.size-1)/config["post_per_page"]+1}
   end
 
   get '/article/add' do
@@ -138,7 +138,7 @@ class MyBlog < Sinatra::Base
 
   get '/article/:id' do |id|
     if articles.has_key?(id)
-      erb :article, :locals => {:meta => meta, :article => articles[id]}
+      haml :article, :locals => {:title => articles[id][:title], :meta => meta, :article => articles[id]}
     else
       redirect to('/')
     end

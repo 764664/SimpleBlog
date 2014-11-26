@@ -1,14 +1,13 @@
 {
 	"title":"吕杰's Blog",
 	"description":"Software Developer",
-    "pass":"964245",
+  "pass":"964245",
 	"mddir":"md/",
-	"postinpage":10,
+	"post_per_page":10,
 	"links":[
-	{"name":"我的Github", "link":"https://github.com/764664/"},
-	{"name":"我的记事本", "link":"/notepad"},
-	{"name":"HTTP信息", "link":"/httpinfo"},
-	{"name":"我的文件分享", "link":"http://pan.baidu.com/s/1pJGwgRL"}
+	{"name":"Github", "link":"https://github.com/764664/"},
+	{"name":"Twitter", "link":"https://twitter.com/764664"},
+	{"name":"Facebook", "link":"https://www.facebook.com/jie.lv.35"}
 	],
 	"go":{
 		"potplayer":"http://pan.baidu.com/s/1pJHcgn5"
