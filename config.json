@@ -5,7 +5,7 @@
 	"mddir":"md/",
 	"post_per_page":10,
 	"links":[
-	{"name":"Github", "link":"https://github.com/764664/", "img":"/icons/Github.png"},
+	{"name":"Github", "link":"https://github.com/764664/", "img":"/icons/GitHub.png"},
 	{"name":"Twitter", "link":"https://twitter.com/764664", "img":"/icons/Twitter.png"},
 	{"name":"Facebook", "link":"https://www.facebook.com/jie.lv.35", "img":"/icons/Facebook.png"},
 	{"name":"Email", "link":"mailto:764664@gmail.com", "img":"/icons/Gmail.png"}
