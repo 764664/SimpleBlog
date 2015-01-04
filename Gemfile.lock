@@ -1,29 +1,43 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    actionpack (4.1.8)
-      actionview (= 4.1.8)
-      activesupport (= 4.1.8)
-      rack (~> 1.5.2)
+    actionpack (4.2.0)
+      actionview (= 4.2.0)
+      activesupport (= 4.2.0)
+      rack (~> 1.6.0)
       rack-test (~> 0.6.2)
-    actionview (4.1.8)
-      activesupport (= 4.1.8)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    actionview (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activesupport (4.1.8)
-      i18n (~> 0.6, >= 0.6.9)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activesupport (4.2.0)
+      i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
+      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     builder (3.2.2)
+    crass (1.0.1)
     erubis (2.7.0)
-    haml (4.0.5)
+    haml (4.0.6)
       tilt
-    i18n (0.6.11)
+    i18n (0.7.0)
     json (1.8.1)
-    minitest (5.4.3)
-    rack (1.5.2)
+    loofah (2.0.1)
+      nokogiri (>= 1.5.9)
+    mini_portile (0.6.2)
+    minitest (5.5.0)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
+    nokogiri (1.6.5-x86-mingw32)
+      mini_portile (~> 0.6.0)
+    nokogumbo (1.2.0)
+      nokogiri
+    rack (1.6.0)
     rack-google-analytics (1.2.0)
       actionpack
       activesupport
@@ -31,7 +45,19 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    redcarpet (3.2.1)
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.5)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.1)
+      loofah (~> 2.0)
+    redcarpet (3.2.2)
+    sanitize (3.1.0)
+      crass (~> 1.0.1)
+      nokogiri (>= 1.4.4)
+      nokogumbo (= 1.2.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -46,8 +72,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  actionpack
   haml
   rack-google-analytics
   redcarpet
+  sanitize
   sinatra
