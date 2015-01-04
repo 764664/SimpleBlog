@@ -4,4 +4,7 @@
     %time= article[:date]
     on
     =article[:category]
-  %section.post-content= article[:content]
+  %section.post-content
+    :markdown
+      #{article[:content]}
+

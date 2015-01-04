@@ -46,9 +46,10 @@ class Blog
     title = lines.shift
     datetime = lines.shift.chomp
     category = lines.shift
-    content = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(lines.join)
+    contentold = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(lines.join)
+    content = lines.join
     #excerpt = ActionController::Base.helpers.sanitize(content, tags: %w(br))[0..200] + "..."
-    excerpt = Sanitize.fragment(content)[0..200] + "..."
+    excerpt = Sanitize.fragment(contentold)[0..200] + "..."
     @articles[File.basename(file, ".md")] = {
       :filename => File.basename(file, ".md"),
       :title => title,
