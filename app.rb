@@ -156,7 +156,8 @@ class MyBlog < Sinatra::Base
       :serverhostname => self.get_hostname(self.server_ip),
       :clienthostname => self.get_hostname(self.client_ip),
       :useragent => request.user_agent,
-      :referrer => request.referrer
+      :referrer => request.referrer,
+      :rubyversion => RUBY_VERSION
     }
   end
 
