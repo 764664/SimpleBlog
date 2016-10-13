@@ -84,7 +84,7 @@ class MyBlog < Sinatra::Base
   articles = blog.articles
   npstring = blog.npstring
 
-  #set :bind, '0.0.0.0'
+  set :bind, '0.0.0.0'
   #set :static_cache_control, [:public, :max_age: 3600]
 
   def get_hostname(ip)
