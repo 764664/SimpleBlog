@@ -2,12 +2,11 @@
 	"title":"吕杰's Blog",
 	"description":"Software Developer",
   	"pass":"PASSWORD",
-	"mddir":"md/",
+	"mddir":"articles/",
 	"post_per_page":10,
 	"links":[
 		{"name":"Github", "link":"https://github.com/764664/", "img":"/icons/GitHub.png"},
 		{"name":"Twitter", "link":"https://twitter.com/764664", "img":"/icons/Twitter.png"},
-		{"name":"Facebook", "link":"https://www.facebook.com/jie.lv.35", "img":"/icons/Facebook.png"},
 		{"name":"Email", "link":"mailto:me@lvjie.me", "img":"/icons/Gmail.png"}
 	],
 	"go":{

@@ -216,3 +216,6 @@ pip-log.txt
 
 #idea
 .idea
+
+#config
+config.json
